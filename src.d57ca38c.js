@@ -5,6 +5,6 @@ var e,t=arguments[3];!function(t,r){"object"==typeof exports&&"object"==typeof m
 },{}],"RzL0":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e=t(require("handlebars/dist/handlebars.runtime"));function t(e){return e&&e.__esModule?e:{default:e}}const r=e.default.template({compiler:[8,">= 4.3.0"],main:function(e,t,r,a,u){return""},useData:!0});var a=r;exports.default=a;
 },{"handlebars/dist/handlebars.runtime":"pAws"}],"Focm":[function(require,module,exports) {
-"use strict";var e=o(require("./templates/handle.hbs"));function o(e){return e&&e.__esModule?e:{default:e}}const n=document.querySelector(".container"),t=fetch("https://pokeapi.co/api/v2/pokemon/3/").then(e=>(console.log(e.json),e.json())).then(o=>{console.log(o);const t=(0,e.default)(o);console.log(t),n.innerHTML=t}).catch(e=>{console.log(e)});
+"use strict";var e=o(require("./templates/handle.hbs"));function o(e){return e&&e.__esModule?e:{default:e}}const t=document.querySelector(".container");fetch("https://pokeapi.co/api/v2/pokemon/3/").then(e=>(console.log(e.json),e.json())).then(o=>{console.log(o);const n=(0,e.default)(o);console.log(n),t.insertAdjacentHTML("afterbegin",n)}).catch(e=>{console.log(e)});
 },{"./templates/handle.hbs":"RzL0"}]},{},["Focm"], null)
-//# sourceMappingURL=/parcel-project-template/src.163b4106.js.map
+//# sourceMappingURL=/goit-js-hw-12-countries/src.d57ca38c.js.map
