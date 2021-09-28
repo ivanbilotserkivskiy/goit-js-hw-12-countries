@@ -4,31 +4,39 @@ import debounce from 'lodash.debounce'
 
 const contRef = document.querySelector('.container')
 const inputRef = document.querySelector('.search-input')
+const listRef = document.querySelector('.countries-list')
 
-inputRef.addEventListener('input', _.debounce(onSearch, 500))
+inputRef.addEventListener('input', onSearch)
 
 function onSearch (e) {
     e.preventDefault();
 
-    const input = e.currentTarget;
-    const searchQuery = input.elements.query.value;
+    const resp = fetch('https://restcountries.com/v2/all')
+    .then(response => response.json())
+    .then(console.log)
+    if(inputRef.value.containe(resp.name)){
 
-    fetchCard(searchQuery)
-    .then(renderCard)
-    .catch(error => console.log(error))
-    .finally(() => form.reset())
+    }
+
+    // const input = e.currentTarget;
+    // const searchQuery = input.elements.query.value;
+
+    // fetchCard(searchQuery)
+    // .then(renderCard)
+    // .catch(error => console.log(error))
+    // .finally(() => form.reset())
 }
 
-function fetchCard(Id) {
-    return fetch(`https://pokeapi.co/api/v2/pokemon/${Id}`).then(response => {
-        return response.json()
-    })
-}
+// function fetchCard(Id) {
+//     return fetch(`https://pokeapi.co/api/v2/pokemon/${Id}`).then(response => {
+//         return response.json()
+//     })
+// }
 
-function renderCard(pokemon) {
-    const markup = pokemonTpl(pokemon)
-    contRef.innerHTML = markup;
-}
+// function renderCard(pokemon) {
+//     const markup = pokemonTpl(pokemon)
+//     contRef.innerHTML = markup;
+// }
 
 // const url = 'https://restcountries.com/v2/name/all'
 
