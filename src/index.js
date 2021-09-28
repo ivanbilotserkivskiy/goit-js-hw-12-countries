@@ -11,12 +11,15 @@ inputRef.addEventListener('input', onSearch)
 function onSearch (e) {
     e.preventDefault();
 
-    const searchQuery = input.elements.query.value;
+    const searchQuery = inputRef.value;
 
-    fetch(`https://restcountries.com/v2/all/${searchQuery}`)
+    fetch(`https://restcountries.com/v2/name/${searchQuery}`)
     .then(response => response.json())
     .then(console.log)
+    .then(menuMarkup(searchQuery))
+    .catch(error => console.log(error))
   
+    // listRef.insertAdjacentHTML('afterbegin', menuMarkup(pokemonTpl));
     // const input = e.currentTarget;
     // const searchQuery = input.elements.query.value;
 
@@ -25,6 +28,12 @@ function onSearch (e) {
     // .catch(error => console.log(error))
     // .finally(() => form.reset())
 }
+function menuMarkup (pokemon) {
+    const markup = pokemon.map(pokemonTpl).join('');
+    // const markup = pokemonTpl(pokemon)
+    // listRef.insertAdjacentHTML('afterbegin', markup);
+    listRef.innerHTML = markup;
+  }
 
 // function fetchCard(Id) {
 //     return fetch(`https://pokeapi.co/api/v2/pokemon/${Id}`).then(response => {
@@ -34,7 +43,7 @@ function onSearch (e) {
 
 // function renderCard(pokemon) {
 //     const markup = pokemonTpl(pokemon)
-//     contRef.innerHTML = markup;
+//     listRef.innerHTML = markup;
 // }
 
 // const url = 'https://restcountries.com/v2/name/all'
