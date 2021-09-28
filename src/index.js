@@ -11,13 +11,12 @@ inputRef.addEventListener('input', onSearch)
 function onSearch (e) {
     e.preventDefault();
 
-    const resp = fetch('https://restcountries.com/v2/all')
+    const searchQuery = input.elements.query.value;
+
+    fetch(`https://restcountries.com/v2/all/${searchQuery}`)
     .then(response => response.json())
     .then(console.log)
-    if(inputRef.value.containe(resp.name)){
-
-    }
-
+  
     // const input = e.currentTarget;
     // const searchQuery = input.elements.query.value;
 
