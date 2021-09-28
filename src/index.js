@@ -1,13 +1,37 @@
 import pokemonTpl from './templates/handle.hbs'
-const containerRef = document.querySelector('.container')
-fetch('https://pokeapi.co/api/v2/pokemon/3/').then(response => {
-    console.log(response.json)
-    return response.json()
-}).then(pokemon => {
-    console.log(pokemon)
+
+import debounce from 'lodash.debounce' 
+
+const contRef = document.querySelector('.container')
+const inputRef = document.querySelector('.search-input')
+
+inputRef.addEventListener('input', _.debounce(onSearch, 500))
+
+function onSearch (e) {
+    e.preventDefault();
+
+    const input = e.currentTarget;
+    const searchQuery = input.elements.query.value;
+
+    fetchCard(searchQuery)
+    .then(renderCard)
+    .catch(error => console.log(error))
+    .finally(() => form.reset())
+}
+
+function fetchCard(Id) {
+    return fetch(`https://pokeapi.co/api/v2/pokemon/${Id}`).then(response => {
+        return response.json()
+    })
+}
+
+function renderCard(pokemon) {
     const markup = pokemonTpl(pokemon)
-    console.log(markup)
-    containerRef.insertAdjacentHTML('afterbegin', markup)
-}).catch(error => {
-    console.log(error)
-})
+    contRef.innerHTML = markup;
+}
+
+// const url = 'https://restcountries.com/v2/name/all'
+
+// fetch(url)
+// .then(response => response.json())
+// .then(console.log)
