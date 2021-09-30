@@ -15,7 +15,10 @@ function onSearch (e) {
 
     fetch(`https://restcountries.com/v2/name/${searchQuery}`)
     .then(response => response.json())
-    .then(console.log)
+    // .then(console.log)   
+    .then(data =>{
+      console.log(data)
+    })
     .then(menuMarkup(searchQuery))
     .catch(error => console.log(error))
   
