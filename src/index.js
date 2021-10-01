@@ -1,5 +1,4 @@
-import debounce from 'lodash.debounce' 
-import { result } from 'lodash'
+import debounce from '../node_modules/lodash.debounce/index' 
 
   import { alert, defaultModules } from '../node_modules/@pnotify/core/dist/PNotify.js';
   import * as PNotifyMobile from '../node_modules/@pnotify/mobile/dist/PNotifyMobile.js';
@@ -10,7 +9,7 @@ const inputRef = document.querySelector('.search-input')
 const listRef = document.querySelector('.countries-list')
 
 
-inputRef.addEventListener('input', onSearch)
+inputRef.addEventListener('input', _.debounce(onSearch),500)
 
 function onSearch (e) {
     
