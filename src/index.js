@@ -1,15 +1,15 @@
-import debounce from '../node_modules/lodash.debounce/index' 
+import debounce from '../node_modules/lodash.debounce/index.js' 
 
   import { alert, defaultModules } from '../node_modules/@pnotify/core/dist/PNotify.js';
   import * as PNotifyMobile from '../node_modules/@pnotify/mobile/dist/PNotifyMobile.js';
 
   defaultModules.set(PNotifyMobile, {});
-
+  const _ = require('lodash'); 
 const inputRef = document.querySelector('.search-input')
 const listRef = document.querySelector('.countries-list')
 
 
-inputRef.addEventListener('input', _.debounce(onSearch),500)
+inputRef.addEventListener('input', _.debounce(onSearch,500))
 
 function onSearch (e) {
     
@@ -25,30 +25,31 @@ function onSearch (e) {
       return data
     })
     .then(array => {
+      if(array.length >= 2 && array.length <= 10) {
+      alert({
+        text: 'Please refine your search'
+      });
+    }
+    else if(array.length > 10) {
+      alert({
+        text: 'Need more information about country'
+      });
+    
+    }
+    else if (array.length === 1) {
+      alert({
+        text: 'Your welcome dear'
+      });
+    }
            let result = array.slice(0,10).map(elem => {
-            if(array.length >= 2 && array.length <= 10) {
-              alert({
-                text: 'Please refine your search'
-              });
-            }
-            else if(array.length > 10) {
-              alert({
-                text: 'Need more information about country'
-              });
             
-            }
-            else if (array.length == 1) {
-              alert({
-                text: 'Your welcome dear'
-              });
-            }
         if(array.length === 1){
-          return `<li>
+          return `
             <h1>${elem.name}</h1>
             <img src='${elem.flags.png}'>
             <p>Capital:${elem.capital}</p>
             <p>Population:${elem.population}<//p>
-          </li>`
+           `
         }
         else {
           
