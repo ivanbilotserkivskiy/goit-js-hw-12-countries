@@ -1,4 +1,4 @@
-import pokemonTpl from './templates/handle.hbs'
+import countryTpl from './templates/handle.hbs'
 
 import debounce from 'lodash.debounce' 
 
@@ -13,44 +13,18 @@ function onSearch (e) {
 
     const searchQuery = inputRef.value;
 
-    fetch(`https://restcountries.com/v2/name/${searchQuery}`)
+   fetch(`https://restcountries.com/v2/name/${searchQuery}`)
     .then(response => response.json())
-    // .then(console.log)   
     .then(data =>{
       console.log(data)
+      return data
     })
-    .then(menuMarkup(searchQuery))
+    .then(appendName(response.name))
     .catch(error => console.log(error))
-  
-    // listRef.insertAdjacentHTML('afterbegin', menuMarkup(pokemonTpl));
-    // const input = e.currentTarget;
-    // const searchQuery = input.elements.query.value;
+    }
+function appendName (name) {
+    // const markup = pokemon.map(pokemonTpl).join('');
 
-    // fetchCard(searchQuery)
-    // .then(renderCard)
-    // .catch(error => console.log(error))
-    // .finally(() => form.reset())
-}
-function menuMarkup (pokemon) {
-    const markup = pokemon.map(pokemonTpl).join('');
-    // const markup = pokemonTpl(pokemon)
-    // listRef.insertAdjacentHTML('afterbegin', markup);
-    listRef.innerHTML = markup;
+    listRef.insertAdjacentHTML('beforeend', countryTpl(name))
   }
 
-// function fetchCard(Id) {
-//     return fetch(`https://pokeapi.co/api/v2/pokemon/${Id}`).then(response => {
-//         return response.json()
-//     })
-// }
-
-// function renderCard(pokemon) {
-//     const markup = pokemonTpl(pokemon)
-//     listRef.innerHTML = markup;
-// }
-
-// const url = 'https://restcountries.com/v2/name/all'
-
-// fetch(url)
-// .then(response => response.json())
-// .then(console.log)
