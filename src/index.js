@@ -1,4 +1,4 @@
-  import CountriesApiService from './fetchCountries'
+  import fetchCountries from './fetchCountries'
   import countryiesTpl from './templates/handle.hbs'
   import { alert, defaultModules } from '../node_modules/@pnotify/core/dist/PNotify.js';
   import * as PNotifyMobile from '../node_modules/@pnotify/mobile/dist/PNotifyMobile.js';
@@ -11,16 +11,14 @@ const listRef = document.querySelector('.countries-list')
 
 inputRef.addEventListener('input', _.debounce(onSearch,500))
 
-const countriesApiService = new CountriesApiService()
-
 function onSearch (e) {
     
     e.preventDefault();
-    listRef.innerHTML ='';
+    // listRef.innerHTML ='';
 
-    countriesApiService.query = inputRef.value;
-
-    countriesApiService.fetchCountries.then(appendCountyMarkup)
+    let searchQuery = inputRef.value
+    console.log(countriesApiService.fetchCountries())
+    countriesApiService.fetchCountries(searchQuery).then(appendCountyMarkup)
 
     // (array => {
     //   if(array.length >= 2 && array.length <= 10) {
@@ -58,13 +56,11 @@ function onSearch (e) {
     //     }
     //   }).join('')
       
-      listRef.insertAdjacentHTML('afterbegin', result)
-    })
-
-    .catch(error => console.log(error))
-    
+      // listRef.insertAdjacentHTML('afterbegin', result)
     }
+
+    
     function appendCountyMarkup(hits) {
-      listRef.insertAdjacentHTML('beforeend', galleryTpl(hits))
-      onScroll()
+      listRef.insertAdjacentHTML('beforeend', countryiesTpl(hits))
+
   }
