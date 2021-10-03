@@ -18,12 +18,13 @@ function onSearch (e) {
     listRef.innerHTML ='';
     
     let searchQuery = inputRef.value
-  //  fetchCountries(searchQuery).then(appendCountyMarkup)
+
   fetchCountries(searchQuery).then(data => {
        array = data.length
-      return array})
-      console.log(array)
-      if(array > 10){
+       console.log(data)
+       console.log(data.length)
+       console.log(array)
+       if(array > 10){
         fetchCountries(searchQuery).then(appendListMarkup)
       }
       else if (array >=2 && array < 10){
@@ -32,6 +33,9 @@ function onSearch (e) {
       else if (array === 1){
         fetchCountries(searchQuery).then(appendCountyMarkup)
       }
+      return array}).then()
+      console.log(array)
+
       
     }
    
