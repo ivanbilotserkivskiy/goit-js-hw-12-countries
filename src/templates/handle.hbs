@@ -3,4 +3,11 @@
             <img src={{flags.png}}>
             <p>Capital:{{capital}}</p>
             <p>Population:{{population}}</p>
+    
+            <ul>
+                {{#each this.languauges}}
+                <li>{{name}}</li>
+                {{/each}}
+            </ul>
+            
 {{/each}}
