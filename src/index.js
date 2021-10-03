@@ -9,7 +9,7 @@
 const inputRef = document.querySelector('.search-input')
 const listRef = document.querySelector('.countries-list')
 
-let b = 0;
+let array = 0;
 inputRef.addEventListener('input', _.debounce(onSearch,500))
 
 function onSearch (e) {
@@ -20,18 +20,19 @@ function onSearch (e) {
     let searchQuery = inputRef.value
   //  fetchCountries(searchQuery).then(appendCountyMarkup)
   fetchCountries(searchQuery).then(data => {
-       b = data.length
-       console.log(data)
-      return b})
-      if(b>10){
+       array = data.length
+      return array})
+      console.log(array)
+      if(array > 10){
         fetchCountries(searchQuery).then(appendListMarkup)
       }
-      else if (b>=2 && b<10){
+      else if (array >=2 && array < 10){
         fetchCountries(searchQuery).then(appendListMarkup)
       }
-      else if (b === 1){
+      else if (array === 1){
         fetchCountries(searchQuery).then(appendCountyMarkup)
       }
+      
     }
    
     
