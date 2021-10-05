@@ -25,7 +25,6 @@ function onSearch (e) {
         alert({
           text: 'need to clarify request'
         });
-        fetchCountries(searchQuery).then(appendListMarkup)
 
       }
       else if (array >=2 && array < 10){
@@ -33,11 +32,12 @@ function onSearch (e) {
         
       }
       else if (array === 1){
+        fetchCountries(searchQuery).then(appendCountyMarkup)
         alert({
           text: 'your welcome dear!'
         });
       
-        fetchCountries(searchQuery).then(appendCountyMarkup)
+
       }
       return array})
       
