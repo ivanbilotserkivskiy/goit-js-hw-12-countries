@@ -39,6 +39,11 @@ function onSearch (e) {
       
 
       }
+      else {
+        alert({
+          text: 'The country you entered does not exist, or please make your request in English'
+        });
+      }
       return array})
       
     }
